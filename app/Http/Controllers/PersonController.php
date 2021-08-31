@@ -50,12 +50,12 @@ class PersonController extends Controller
     public function update(Request $request, $id)
     {
         // Prepare person table data
-        $person = Person::find($id)->first();
+        $person = Person::find($id);
         $person->name = $request->name;
         $person->email = $request->email;
         $person->dob = $request->dob;
         $person->address = $request->address;
-        $person->save();
+        $person->update();
 
         // Prepare alternate address table data
         $alt_address = AlternateAddress::where('user_id', $id)->first();
@@ -64,7 +64,7 @@ class PersonController extends Controller
         $alt_address->parish = $request->parish;
         $alt_address->country = $request->country;
 
-        $alt_address->save();
+        $alt_address->update();
         return redirect()->back();
     }
 
